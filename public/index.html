@@ -3,32 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <title>Chat Panel Console</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/pmcss.css">
 </head>
 
 <body>
-  <ul class="pages">
-    <li class="chat page">
 
-      <div class="chatArea">
-        <ul class="messages">
-        <!--Messages-->
-        </ul>
-      </div>
-      <!--Input Box for typing Message-->
-      <input class="inputMessage" placeholder="Type here..."/>
-    </li>
-    <!--if page loaded and not logged in, make this visible only-->
-    <li class="login page">
-      <div class="form">
-        <h3 class="title">What's your Player_ID?</h3>
-        <input class="usernameInput" type="text" maxlength="14" />
-      </div>
-    </li>
-  </ul>
+  <div class="wrapper">
+      <h1>Senior Project<span>[Admin Panel]</span></h1>
+    <section class="psummary">
+      <div class="psummary-left">
 
+      </div>
+      <div class="psummary-right">
+        <p><span class="entypo-chart-line"></span> Progress</p>
+        <div class="progress">
+          <!-- Very easy to feed via PHP through the field value -->
+          <progress max="100" value="7"></progress>
+        <span>70%</span></div>
+      </div>
+    </section>
+    <section class="pcontent-l">
+      <div class="info">
+  <div class="tabs" data-tabgroup="tab-group">
+          <div class="active"><a href="#information">Information</a></div>
+          <div><a href="#evaluation">Evaluation</a></div>
+          <div><a href="#client">Client</a></div>
+          <div><a href="#requeriments">Requeriments</a></div>
+          <div><a href="#chatCommands">Chat Commands</a></div>
+          <div><a href="#api">API Docs</a></div>
+        </div>
+        <section id="tab-group" class="tabgroup">
+    <div id="information">
+      <h2>Heading 1</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla deserunt consectetur ratione id tempore laborum laudantium facilis reprehenderit beatae dolores ipsum nesciunt alias iusto dicta eius itaque blanditiis modi velit.</p>
+    </div>
+    <div id="evaluation">
+      <h2>Heading 2</h2>
+      <p>Adipisci autem obcaecati velit natus quos beatae explicabo at tempora minima voluptates deserunt eum consectetur reiciendis placeat dolorem repellat in nam asperiores impedit voluptas iure repellendus unde eveniet accusamus ex.</p>
+    </div>
+    <div id="client">
+      <h2>Heading 3</h2>
+      <p>Atque ratione soluta laboriosam illo inventore amet ipsum aliquam assumenda harum provident nam accusantium neque debitis obcaecati maxime officia saepe ad ducimus in quam libero vero quasi. Saepe sit nisi?</p>
+    </div>
+    <div id="requeriments">
+      <h2>Heading 4</h2>
+      <p>Quidem perferendis id sapiente cumque ullam repellendus dolorum odit rerum quibusdam tempora voluptatibus ipsum. Maiores laborum velit aperiam dicta quisquam assumenda at esse exercitationem culpa sequi porro minus ipsa aut.</p>
+    </div>
+    <div id="chatCommands">
+      <object class="chatObject" type="text/html" data="chat/chatCommands.html"></object>
+    </div>
+    <div id="api">
+      <iframe class="apidocs" src="http://localhost:3000/doc/index.html"></iframe>
+    </div>
+  </section>
+      </div>
+      <div class="conversation">
+        <h3 class="convo_title">Conversation</h3>
+        <!--INCLUDE CHAT HERE-->
+          <object class="chatObject" type="text/html" data="chat/chat.html" ></object>
+
+      </div>
+
+    </section>
+    <aside class="pcontent-r">
+      <div class="history">
+        <h3>Project History</h3>
+      </div>
+      <div class="team">
+        <h3 class="convo_title">Players</h3>
+        <object class="chatObject" type="text/html" data="chat/userlist.html" ></object>
+
+      </div>
+    </aside>
+  </div> <!-- END Wrapper -->
+    <footer>
+     <p><i class="fa fa-coffee"></i>Admin Panel @ Andres, John, & Josh</p>
+  </footer>
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="js/main.js"></script>
+
+  <script src="js/pmjs.js"></script>
 </body>
 </html>

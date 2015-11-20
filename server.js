@@ -5,11 +5,20 @@ var io = require('socket.io')(server);
 var request = require('request');
 var port = 3700;
 
+
 server.listen(port, function () {
     console.log('Updated : Server listening at port %d', port);
 });
-
+app.use(function(req, res, next) {
+        console.log('Request made');
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        res.header("Access-Control-Allow-Headers", "Content-Type");
+        res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
+        next();
+    });
 //Routing
+app.use('/chat',  express.static(__dirname + '/public/chat'));
 app.use('/js',  express.static(__dirname + '/public/js'));
 app.use('/css', express.static(__dirname + '/public/css'));
 app.use(express.static(__dirname + '/public'));
@@ -23,6 +32,30 @@ function unpad(str) {
   str = str.substring(2);
   return parseInt(str);
 };
+
+
+
+  //SETTING UP USER-LIST NAME SPACE TO JUST RECEIVE ONLINE PLAYERS
+  var ulio = io.of('/user-list');
+
+  ulio.on('connection', function(ulsocket){
+    console.log('getting user list');
+    sendUserList();
+
+    ulsocket.on('user list', function() {
+        console.log('user connected');
+    })
+
+  });
+
+  function sendUserList() {
+    ulio.emit('user list', {
+      numUsers: numUsers,
+      users: Object.keys(users)
+    });
+  }
+
+
 
 io.on('connection', function (socket) {
   var addedUser = false;
@@ -80,7 +113,8 @@ io.on('connection', function (socket) {
           username: socket.username,
           numUsers: numUsers
         });
-
+        //send our userlist
+        sendUserList();
       }
     });
   });
@@ -117,6 +151,9 @@ io.on('connection', function (socket) {
         username: socket.username,
         numUsers: numUsers
       });
+      //retransmit userlist after user has been deleted
+      sendUserList();
+
     }
   });
 });

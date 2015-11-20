@@ -1,0 +1,70 @@
+html, body {
+    height: 100%;
+    font-weight: 300;
+-webkit-font-smoothing: antialiased;
+}
+
+.parent {
+  padding: 0;
+  height: 100%;
+}
+
+.pages {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.page {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+.chat.page {
+  display: none;
+}
+.chatWindow {
+  width: 50%;
+  height: 100%;
+}
+
+.chatArea {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  padding-bottom: 60px;
+}
+
+.messageBody {
+  font-style: italic;
+
+}
+
+.messages {
+  height: 100%;
+  margin: 0;
+  overflow-y: scroll;
+  padding: 10px 20px 10px 20px;
+}
+
+.inputMessage, .usernameInput {
+  size: 25px;
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  bottom: 0;
+  position: bottom;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+  word-wrap: break-word;
+}
+li {
+  list-style: none;
+  color: black;
+}

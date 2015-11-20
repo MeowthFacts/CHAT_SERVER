@@ -15,7 +15,6 @@ $(function() {
 
   var socket = io();
 
-  console.log($window);
   //Clicking anywhere on the login page
   //will focus on the input box
   $loginPage.click(function () {
@@ -69,15 +68,16 @@ $(function() {
       }
 
   }
+
   // Adds the visual chat message to the message list
-function addChatMessage (data, options) {
+  function addChatMessage (data, options) {
   // Don't fade the message in if there is an 'X was typing'
 
   options = options || {};
 
   var $usernameDiv = $('<span class="username"/>')
-    .text(data.username)
-    .css('color', '#fff');
+    .text(data.username + ": ")
+    .css('color', '#000');
   var $messageBodyDiv = $('<span class="messageBody">')
     .text(data.message);
 
@@ -91,9 +91,9 @@ function addChatMessage (data, options) {
   function addParticipantsMessage (data) {
     var message = '';
     if (data.numUsers === 1) {
-      message += "there's 1 participant";
+      message += "There's 1 participant";
     } else {
-      message += "there are " + data.numUsers + " participants";
+      message += "There are " + data.numUsers + " participants...";
     }
     log(message);
   }
@@ -150,5 +150,6 @@ function addChatMessage (data, options) {
     console.log(data.message);
     addChatMessage(data, {});
   });
+
 
 });
