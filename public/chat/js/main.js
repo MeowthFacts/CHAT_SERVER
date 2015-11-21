@@ -42,23 +42,25 @@ $(function() {
 
   function setUsername() {
     username = cleanInput($loginUser.val().trim());
-
     if(username) {
-      $loginPage.fadeOut();
-      $chatPage.show();
-      $loginPage.off('click');
-
       //tell socket you're username
       socket.emit('add user', username);
     }
+  }
 
+  function login() {
+    if(connected) {
+      $loginPage.fadeOut();
+      $chatPage.show();
+      $loginPage.off('click');
+    }
   }
 
   function sendMessage() {
       var message = $inputMessage.val();
       message = cleanInput(message);
       console.log(message);
-      if(message) {
+      if(connected && message) {
         $inputMessage.val('');
         addChatMessage({
           username: username,
@@ -89,13 +91,16 @@ $(function() {
 }
 
   function addParticipantsMessage (data) {
-    var message = '';
-    if (data.numUsers === 1) {
-      message += "There's 1 participant";
-    } else {
-      message += "There are " + data.numUsers + " participants...";
+    if(connected) {
+        var message = '';
+      if (data.numUsers === 1) {
+        message += "There's 1 participant";
+      } else {
+        message += "There are " + data.numUsers + " participants...";
+      }
+      log(message);
     }
-    log(message);
+
   }
 
   function log (message, options) {
@@ -137,6 +142,8 @@ $(function() {
 
   socket.on('login', function (data) {
     console.log(username = data.username);
+    connected = true;
+    login();
     numUsers = data.numUsers;
   });
 
@@ -151,5 +158,10 @@ $(function() {
     addChatMessage(data, {});
   });
 
+  socket.on('login error', function (data) {
+    console.log(data.error);
+    log(data.error, {});
+    connected = false;
+  });
 
 });
